@@ -7,11 +7,16 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class User_Attendance extends Model
+class UserAttendance extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['user_id', 'time', 'date', 'comment'];
+    protected $fillable = [
+        'user_id', 
+        'time', 
+        'date', 
+        'comment'
+    ];
 
     public function attendances(): HasMany
     {

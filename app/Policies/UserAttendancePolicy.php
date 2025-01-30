@@ -3,7 +3,7 @@
 namespace App\Policies;
 
 use App\Models\User;
-use App\Models\User_Attendance;
+use App\Models\UserAttendance;
 
 class UserAttendancePolicy
 {
@@ -14,7 +14,7 @@ class UserAttendancePolicy
     {
         //
     }
-    public function update(User $user, User_Attendance $attendance)
+    public function update(User $user, UserAttendance $attendance)
 {
     return now()->diffInMinutes($attendance->created_at) < 10;
 }

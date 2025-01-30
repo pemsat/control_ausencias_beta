@@ -33,8 +33,8 @@ class Attendance extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function user_attendance(): BelongsTo
+    public function userattendance(): BelongsTo
     {
-        return $this->belongsTo(User_Attendance::class);
+        return $this->belongsTo(UserAttendance::class);
     }
 }

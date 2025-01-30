@@ -6,6 +6,7 @@ use App\Filament\Resources\UserResource\Pages;
 use App\Filament\Resources\UserResource\RelationManagers;
 use App\Models\User;
 use Filament\Forms;
+use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
@@ -26,17 +27,29 @@ class UserResource extends Resource
     {
         return $form
             ->schema([
-                TextInput::make('name')->required(),
-                TextInput::make('surname')->required(),
-                TextInput::make('email')->email()->unique()->required(),
+                TextInput::make('name')
+                ->label('Nombre')
+                ->required(),
+                TextInput::make('surname')
+                ->label('Apellidos')
+                ->required(),
+                TextInput::make('email')
+                ->label('Correo electrónico')
+                ->email()
+                ->unique()
+                ->required(),
                 Select::make('department_id')
+                    ->label('Departamento')
                     ->relationship('department', 'name')
-                    ->searchable()
                     ->preload()
+                    ->searchable()
                     ->createOptionForm([
                         TextInput::make('name')
                     ])
                     ->required(),
+                FileUpload::make('document')
+                    ->label('archivo .csv')
+                    ->acceptedFileTypes(['.csv']),
             ]);
     }
 
@@ -44,8 +57,10 @@ class UserResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('name'),
+                TextColumn::make('name')
+                ->label('Nombre'),
                 TextColumn::make('department.name')
+                ->label('Departamento'),
             ])
             ->filters([
                 //
